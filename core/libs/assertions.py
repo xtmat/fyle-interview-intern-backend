@@ -1,4 +1,5 @@
 from .exceptions import FyleError
+from marshmallow.exceptions import ValidationError
 
 
 def base_assert(error_code, msg):
@@ -23,3 +24,12 @@ def assert_valid(cond, msg='BAD_REQUEST'):
 def assert_found(_obj, msg='NOT_FOUND'):
     if _obj is None:
         base_assert(404, msg)
+
+
+#for validating the submitted grades
+def grade_assert(error_code, msg):
+    raise ValidationError('Submitted graded formet is wrong')
+
+def assert_validgrade(cond, msg = 'INVALID_SUBMITTED_GRADE'):
+    if cond is False:
+        grade_assert(400, msg)
